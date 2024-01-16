@@ -4,17 +4,22 @@ import (
 	"fmt"
 	"bufio"
 	"os"
+	"github.com/segunkayode1/pokedex/internal/pokedexapi"
 )
 
 
-func repl(){
+func repl(cfg *pokedexapi.Config){
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Printf("pokedex > ")
 	cliMap := getCommandMap()
 	for scanner.Scan() {
 		text := scanner.Text()
 		if _,ok := cliMap[text]; ok {
-			cliMap[text].callback()
+			err := cliMap[text].callback(cfg)
+			if err != nil {
+				fmt.Println(err)
+			}
+
 		}
 
 		fmt.Printf("pokedex > ")
@@ -23,7 +28,7 @@ func repl(){
 type cliCom struct {
 	name string
 	description string
-	callback func() error
+	callback func(cfg * pokedexapi.Config) error
 }
 func getCommandMap() map[string]cliCom {
 	return map[string]cliCom {

@@ -1,10 +1,10 @@
 package main
 
-import "fmt"
+import ("fmt"
+"github.com/segunkayode1/pokedex/internal/pokedexapi"
+)
 
-
-
-func commandHelp() error{
+func commandHelp(cfg *pokedexapi.Config) error{
 	fmt.Printf("\nThis is a cli tool for finding Information about pokemon!\n\n")
 	fmt.Printf("Usage:\n\n")
 	fmt.Printf("\t\t<command> [arguments]\n\n")
