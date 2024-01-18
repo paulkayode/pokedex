@@ -5,9 +5,11 @@ import (
 	"net/http"
 	"errors"
 	"github.com/segunkayode1/pokedex/internal/cache"
+	"time"
 )
+const interval = 5 * time.Second
 
-var m_cache cache.Cache = cache.Cache{ V: make(map[string][]byte) }
+var m_cache cache.Cache = cache.NewCache(interval)
 
 func getJson(url string) ([]byte, error){
 	if val, ok := m_cache.Get(url); ok{
