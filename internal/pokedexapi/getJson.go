@@ -3,9 +3,9 @@ package pokedexapi
 import (
 	"io"
 	"net/http"
-	"errors"
 	"github.com/segunkayode1/pokedex/internal/cache"
 	"time"
+	"fmt"
 )
 const interval = 5 * time.Second
 
@@ -22,7 +22,7 @@ func getJson(url string) ([]byte, error){
 	val, err:= io.ReadAll(resp.Body)
 	resp.Body.Close()
 	if resp.StatusCode > 399 {
-		return []byte{},errors.New("newtork error")
+		return []byte{}, fmt.Errorf("network-issue, status code: %v", resp.Status)
 	}
 	if err != nil {
 		return []byte{}, err

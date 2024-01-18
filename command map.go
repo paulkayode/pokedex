@@ -13,7 +13,10 @@ func printMap(cfg *pokedexapi.Config){
 
 
 }
-func commandMap(cfg *pokedexapi.Config) error {
+func commandMap(cfg *pokedexapi.Config, arg string) error {
+	if cfg.Next != nil && *cfg.Next == "https://pokeapi.co/api/v2" {
+		*cfg.Next  = *cfg.Next + "/location-area"
+	}
 	res, err := pokedexapi.GetNextConfig(cfg)
 	if err != nil {
 		return err
@@ -23,7 +26,7 @@ func commandMap(cfg *pokedexapi.Config) error {
 	return nil
 }
 
-func commandMapb(cfg *pokedexapi.Config) error {
+func commandMapb(cfg *pokedexapi.Config, arg string) error {
 	res, err := pokedexapi.GetPrevConfig(cfg)
 	if err != nil {
 		return err
@@ -32,3 +35,4 @@ func commandMapb(cfg *pokedexapi.Config) error {
     *cfg = *res
 	return nil
 }
+

@@ -35,7 +35,7 @@ func GetNextConfig(cfg *Config) (*Config, error){
 
 func GetPrevConfig(cfg *Config) (*Config, error){
 	if cfg.Previous == nil {
-	   return cfg, errors.New("no next Page")
+	   return cfg, errors.New("no previous Page")
 	}
 	url := *cfg.Previous
 	val, err := getJson(url)

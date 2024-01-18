@@ -5,7 +5,7 @@ import (
 
 
 func main(){
-	url := "https://pokeapi.co/api/v2/location-area"
+	url := "https://pokeapi.co/api/v2"
 	cfg := pokedexapi.Config{Next: &url}
 	repl(&cfg)
 }
