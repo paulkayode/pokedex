@@ -85,6 +85,11 @@ func getCommandMap() map[string]cliCom {
 			description: "Given name of pokemon, if previously caught displays information about pokemon",
 			callback: commandInspect,
 		},
+		"pokedex": {
+			name: "pokedex",
+			description: "provides list of captured pokemon in pokedex",
+			callback: commandPokedex,
+		},
 	}
 }
 
