@@ -11,7 +11,7 @@ const interval = 5 * time.Second
 
 var m_cache cache.Cache = cache.NewCache(interval)
 
-func getJson(url string) ([]byte, error){
+func GetJson(url string) ([]byte, error){
 	if val, ok := m_cache.Get(url); ok{
 		return val, nil
 	}

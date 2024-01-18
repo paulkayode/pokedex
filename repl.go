@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
 	"github.com/segunkayode1/pokedex/internal/pokedexapi"
 )
 
+
+var pokedex map[string]pokemon = map[string]pokemon{}
 
 func repl(cfg *pokedexapi.Config){
 	scanner := bufio.NewScanner(os.Stdin)
@@ -16,17 +17,21 @@ func repl(cfg *pokedexapi.Config){
 	cliMap := getCommandMap()
 	for scanner.Scan() {
 		text := scanner.Text()
+		text = strings.Trim(text, " ")
 		args := strings.Split(text, " ")
 		text = args[0]
 		if command,ok := cliMap[text]; ok {
 			arg := ""
-			if text == "explore"{
+			if text == "explore" || text == "catch" {
 				if(len(args) == 2){
 					arg = args[1]
 				}else{
-					fmt.Println("Incorrect amount of arguments for explore 1 argument required")
+					fmt.Printf("Incorrect amount of arguments for %v 1 argument required\n",text)
+					fmt.Printf("pokedex > ")
+					continue
 				}
 			}
+
 			err := command.callback(cfg,arg)
 			if err != nil {
 				fmt.Println(err)
@@ -70,5 +75,12 @@ func getCommandMap() map[string]cliCom {
 			description: "Given name of location prints list of pokemon from that location",
 			callback: commandExplore,
 		},
+		"catch": {
+			name: "catch",
+			description: "Given name of pokemon will attempt to catch pokemon if successfull, pokemon is added to pokedex",
+			callback: commandCatch,
+		},
 	}
 }
+
+
