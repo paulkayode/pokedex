@@ -22,9 +22,9 @@ func repl(cfg *pokedexapi.Config){
 		text = args[0]
 		if command,ok := cliMap[text]; ok {
 			arg := ""
-			if text == "explore" || text == "catch" {
+			if text == "explore" || text == "catch"  || text == "inspect"{
 				if(len(args) == 2){
-					arg = args[1]
+					arg = strings.ToLower(args[1])
 				}else{
 					fmt.Printf("Incorrect amount of arguments for %v 1 argument required\n",text)
 					fmt.Printf("pokedex > ")
@@ -79,6 +79,11 @@ func getCommandMap() map[string]cliCom {
 			name: "catch",
 			description: "Given name of pokemon will attempt to catch pokemon if successfull, pokemon is added to pokedex",
 			callback: commandCatch,
+		},
+		"inspect": {
+			name: "inspect",
+			description: "Given name of pokemon, if previously caught displays information about pokemon",
+			callback: commandInspect,
 		},
 	}
 }
