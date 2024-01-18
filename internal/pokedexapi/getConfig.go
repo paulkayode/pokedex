@@ -18,7 +18,7 @@ func getConfig(val []byte)(*Config, error){
 
 func GetNextConfig(cfg *Config) (*Config, error){
    if cfg.Next == nil {
-	  return cfg, errors.New("No next Page")
+	  return cfg, errors.New("no next Page")
    }
    url := *cfg.Next
    val, err := getJson(url)
@@ -35,7 +35,7 @@ func GetNextConfig(cfg *Config) (*Config, error){
 
 func GetPrevConfig(cfg *Config) (*Config, error){
 	if cfg.Previous == nil {
-	   return cfg, errors.New("No next Page")
+	   return cfg, errors.New("no next Page")
 	}
 	url := *cfg.Previous
 	val, err := getJson(url)
